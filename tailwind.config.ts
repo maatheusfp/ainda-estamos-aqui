@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'mono': 'var(--font-mono)',
+				'serif': 'var(--font-serif)',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -52,15 +56,21 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				warning: {
+					DEFAULT: 'hsl(var(--warning))',
+					foreground: 'hsl(var(--warning-foreground))'
+				},
+				government: {
+					DEFAULT: 'hsl(var(--government))',
+					foreground: 'hsl(var(--government-foreground))'
+				},
+				population: {
+					DEFAULT: 'hsl(var(--population))',
+					foreground: 'hsl(var(--population-foreground))'
+				},
+				paranoia: {
+					DEFAULT: 'hsl(var(--paranoia))',
+					foreground: 'hsl(var(--paranoia-foreground))'
 				}
 			},
 			borderRadius: {
