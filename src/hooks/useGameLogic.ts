@@ -20,12 +20,18 @@ export const useGameLogic = (playerData: PlayerData | null) => {
   const makeDecision = useCallback((choice: Choice, decisionTime: number) => {
     if (!playerData) return;
 
+    console.log('Making decision:', choice.id, 'Current round:', gameState.round);
+
     setGameState(prevState => {
+      console.log('Previous state:', prevState);
+      
       const newScores = {
         population: Math.max(0, Math.min(100, prevState.scores.population + (choice.effects.population || 0))),
         government: Math.max(0, Math.min(100, prevState.scores.government + (choice.effects.government || 0))),
         paranoia: Math.max(0, prevState.scores.paranoia + (choice.effects.paranoia || 0))
       };
+
+      console.log('New scores:', newScores);
 
       // Registrar métrica da decisão
       const metric: DecisionMetric = {
@@ -65,19 +71,30 @@ export const useGameLogic = (playerData: PlayerData | null) => {
       const nextRound = prevState.round + 1;
       const isGameOver = nextRound >= gameCards.length || newScores.population === 0 || newScores.government === 0;
 
-      return {
+      console.log('Next round:', nextRound, 'Is game over:', isGameOver);
+
+      const newState = {
         ...prevState,
         round: nextRound,
         scores: newScores,
         consequences: newConsequences,
         isGameOver
       };
+
+      console.log('New state:', newState);
+      return newState;
     });
   }, [playerData]);
 
   const getCurrentCard = useCallback(() => {
-    if (gameState.round >= gameCards.length) return null;
-    return gameCards[gameState.round];
+    console.log('getCurrentCard called - round:', gameState.round, 'total cards:', gameCards.length);
+    if (gameState.round >= gameCards.length) {
+      console.log('No more cards - round exceeds available cards');
+      return null;
+    }
+    const card = gameCards[gameState.round];
+    console.log('Returning card:', card?.id, card?.title);
+    return card;
   }, [gameState.round]);
 
   const shouldSkipCurrentRound = useCallback(() => {

@@ -77,6 +77,7 @@ const Index = () => {
         <div className="mb-8">
           {currentCard ? (
             <GameCard
+              key={`${currentCard.id}-${gameState.round}`}
               card={currentCard}
               onChoice={handleChoice}
               isSkipped={isSkipped}

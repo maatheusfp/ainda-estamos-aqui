@@ -13,10 +13,24 @@ export const GameCard = ({ card, onChoice, isSkipped = false }: GameCardProps) =
   const [startTime] = useState(Date.now());
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
 
+  console.log('GameCard rendered with card:', card.id, 'selectedChoice:', selectedChoice);
+
   const handleChoice = (choice: Choice) => {
+    console.log('Button clicked for choice:', choice.id);
+    console.log('Selected choice before:', selectedChoice);
+    
+    if (selectedChoice !== null) {
+      console.log('Button disabled - choice already selected');
+      return;
+    }
+    
     const decisionTime = Date.now() - startTime;
     setSelectedChoice(choice.id);
-    setTimeout(() => onChoice(choice, decisionTime), 300);
+    console.log('Choice selected:', choice.id, 'Decision time:', decisionTime);
+    setTimeout(() => {
+      console.log('Calling onChoice callback');
+      onChoice(choice, decisionTime);
+    }, 300);
   };
 
   const getCardTypeColor = (type: Card['type']) => {
