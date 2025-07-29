@@ -64,7 +64,7 @@ const Index = () => {
             AINDA ESTAMOS AQUI
           </h1>
           <p className="text-muted-foreground font-mono text-sm mb-4">
-            Rodada {gameState.round + 1} de {6} • Jornalista em Regime Autoritário
+            Rodada {gameState.round + 1} de {16} • Jornalista em Regime Autoritário
           </p>
         </div>
 
