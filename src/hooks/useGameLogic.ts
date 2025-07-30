@@ -53,7 +53,10 @@ export const useGameLogic = (playerData: PlayerData | null) => {
           ),
           paranoia: Math.max(
             0,
-            Math.min(100, Math.round(prevState.scores.paranoia + paranoiaIncrease))
+            Math.min(
+              100,
+              Math.round(prevState.scores.paranoia + paranoiaIncrease)
+            )
           ),
         };
         console.log("New scores:", newScores);
@@ -173,8 +176,9 @@ export const useGameLogic = (playerData: PlayerData | null) => {
   const getScoreWithError = (scoreName: "population" | "government") => {
     const real = gameState.scores[scoreName];
     const margin = getErrorMargin();
-    const min = Math.max(0, real - margin);
-    const max = Math.min(100, real + margin);
+    const half = Math.floor(margin / 2);
+    const min = Math.max(0, real - half);
+    const max = Math.min(100, real + half);
     // Valor "percebido" aleatório dentro do range
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
