@@ -39,7 +39,7 @@ export const gameCards: Card[] = [
       {
         id: 'publish',
         text: 'PUBLICAR',
-        effects: { population: 20, government: -20, paranoia: 20 },
+        effects: { population: 20, government: -20, paranoia: 10 },
         consequence: 'Sua família começará a ser perseguida pelo governo'
       },
       {
@@ -81,7 +81,7 @@ export const gameCards: Card[] = [
       {
         id: 'protest_law',
         text: 'Nova lei limita horário de protestos nas ruas',
-        effects: { population: -10, government: 15, paranoia: 5 },
+        effects: { population: -10, government: 15, paranoia: 0 },
         hiddenEffects: true
       },
       {
@@ -93,7 +93,7 @@ export const gameCards: Card[] = [
       {
         id: 'archive_fire',
         text: 'Incêndio atinge arquivos históricos em instituição pública, e revela infraestrutura precária',
-        effects: { population: 10, government: -10, paranoia: 5 },
+        effects: { population: 10, government: -10, paranoia: 0 },
         hiddenEffects: true
       }
     ]
@@ -109,13 +109,13 @@ export const gameCards: Card[] = [
       {
         id: 'publish',
         text: 'DIVULGAR',
-        effects: { population: 25, government: -25, paranoia: 30 },
+        effects: { population: 25, government: -25, paranoia: 15 },
         consequence: 'Será ameaçado de sofrer um atentado a qualquer momento.'
       },
       {
         id: 'censor',
         text: 'CENSURAR',
-        effects: { population: -25, government: 15, paranoia: -10 }
+        effects: { population: -25, government: 15, paranoia: -15 }
       }
     ]
   },
@@ -200,7 +200,7 @@ export const gameCards: Card[] = [
       {
         id: 'border_reinforcement',
         text: 'Governo reforça fronteiras para impedir entrada de "elementos indesejáveis"',
-        effects: { population: -10, government: 10, paranoia: 5 },
+        effects: { population: -10, government: 10, paranoia: 0 },
         hiddenEffects: true
       },
       {
@@ -212,7 +212,7 @@ export const gameCards: Card[] = [
       {
         id: 'trash_strike',
         text: 'Greve de coletores de lixo causa acúmulo de resíduos na capital',
-        effects: { population: 5, government: -5, paranoia: 5 },
+        effects: { population: 5, government: -5, paranoia: 0 },
         hiddenEffects: true
       }
     ]
@@ -256,7 +256,7 @@ export const gameCards: Card[] = [
       {
         id: 'publish',
         text: 'DIVULGAR',
-        effects: { population: 25, government: -30, paranoia: 25 },
+        effects: { population: 25, government: -30, paranoia: 10 },
         consequence: 'Você será monitorado constantemente e sua família sofrerá ameaças.'
       },
       {
