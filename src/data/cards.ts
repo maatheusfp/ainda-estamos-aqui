@@ -3,387 +3,363 @@ import { Card } from '@/types/game';
 export const gameCards: Card[] = [
   // Rodada 1 - Assistente
   {
-    id: 'assist_1',
+    id: 'assistant_transport',
     type: 'assistente',
     title: 'Notícias do Dia',
-    description: 'Seu assistente trouxe 3 notícias para você escolher qual será a manchete de capa do jornal:',
+    description: 'Meu assistente chegou com 3 notícias, preciso escolher uma delas para publicar ainda hoje:',
     choices: [
       {
-        id: 'assist_1_corruption',
-        text: '"Ministro envolvido em esquema de corrupção"',
-        effects: { population: 12, government: -15, paranoia: 2 },
+        id: 'transport_crisis',
+        text: 'Crise nos transportes afeta rotina de trabalhadores',
+        effects: { population: 10, government: -10, paranoia: 0 },
         hiddenEffects: true
       },
       {
-        id: 'assist_1_economy',
-        text: '"PIB cresce 2% no trimestre"',
-        effects: { population: -2, government: 8, paranoia: 0 },
+        id: 'mobility_plan',
+        text: 'Ministério anuncia novo plano de mobilidade urbana',
+        effects: { population: -5, government: 5, paranoia: 0 },
         hiddenEffects: true
       },
       {
-        id: 'assist_1_social',
-        text: '"Programa social beneficia 50 mil famílias"',
-        effects: { population: 6, government: 4, paranoia: 0 },
+        id: 'metro_delays',
+        text: 'População enfrenta dificuldades com atrasos no metrô',
+        effects: { population: 5, government: -5, paranoia: 0 },
         hiddenEffects: true
       }
     ]
   },
-  
+
   // Rodada 2 - Informante
   {
-    id: 'inform_1',
+    id: 'informant_torture',
     type: 'informante',
-    title: 'Evidências de Tortura',
-    description: 'Um informante trouxe evidências de tortura sistemática em prisões do governo. A notícia denunciaria graves violações de direitos humanos.',
+    title: 'Universidades são fechadas e professores investigados por "ativismo ideológico"',
+    description: 'O filósofo seu José foi sequestrado pelo governo para ser torturado em virtude da sua influência nos ideais revolucionários.',
     choices: [
       {
-        id: 'inform_1_publish',
-        text: 'PUBLICAR - Denunciar as torturas',
-        effects: { population: 18, government: -20, paranoia: 3 },
-        consequence: 'Governo marca você como inimigo'
+        id: 'publish',
+        text: 'PUBLICAR',
+        effects: { population: 20, government: -20, paranoia: 20 },
+        consequence: 'Sua família começará a ser perseguida pelo governo'
       },
       {
-        id: 'inform_1_ignore',
-        text: 'IGNORAR - Não publicar a denúncia',
-        effects: { population: -12, government: 5, paranoia: -2 }
+        id: 'ignore',
+        text: 'IGNORAR',
+        effects: { population: -30, government: 15, paranoia: 0 }
       }
     ]
   },
 
   // Rodada 3 - Agente
   {
-    id: 'agent_1',
+    id: 'government_security',
     type: 'agente',
-    title: 'Toque de Recolher Aumenta Segurança',
-    description: 'Agente do governo traz matéria pronta: "Toque de recolher rigoroso e vigilância nas ruas aumentam segurança da população". Militares ampliam controle noturno e reforçam patrulhas.',
+    title: 'Medidas de segurança reforçadas e toque de recolher garantem proteção e tranquilidade à população.',
+    description: 'Devido aos esforços do governo, o país está mais forte e seguro que nunca',
     choices: [
       {
-        id: 'agent_1_publish',
-        text: 'PUBLICAR - Apoiar as medidas de segurança',
-        effects: { population: -10, government: 15, paranoia: -3 }
+        id: 'publish',
+        text: 'PUBLICAR',
+        effects: { population: -20, government: 10, paranoia: -20 },
+        consequence: 'O governo vai perdoar alguma consequência pessoal' // Renamed from 'benefit' for consistency
       },
       {
-        id: 'agent_1_ignore',
-        text: 'IGNORAR - Não publicar propaganda governamental',
-        effects: { population: 5, government: -8, paranoia: 4 }
+        id: 'ignore',
+        text: 'IGNORAR',
+        effects: { population: 15, government: -20, paranoia: 10 }
       }
     ]
   },
 
   // Rodada 4 - Assistente
   {
-    id: 'assist_2',
+    id: 'assistant_events',
     type: 'assistente',
     title: 'Edição Matutina',
-    description: 'Seu assistente apresenta 3 opções de manchete para a edição de hoje:',
+    description: 'Meu assistente chegou com 3 notícias, preciso escolher uma delas para publicar ainda hoje',
     choices: [
       {
-        id: 'assist_2_protest',
-        text: '"Manifestações pacíficas pedem mudanças"',
-        effects: { population: 10, government: -8, paranoia: 1 },
+        id: 'protest_law',
+        text: 'Nova lei limita horário de protestos nas ruas',
+        effects: { population: -10, government: 15, paranoia: 5 },
         hiddenEffects: true
       },
       {
-        id: 'assist_2_infrastructure',
-        text: '"Nova ponte será inaugurada na capital"',
-        effects: { population: 2, government: 6, paranoia: -1 },
+        id: 'cultural_festival',
+        text: 'Festival cultural celebra diversidade regional',
+        effects: { population: 5, government: -5, paranoia: 0 },
         hiddenEffects: true
       },
       {
-        id: 'assist_2_education',
-        text: '"Universidades enfrentam cortes no orçamento"',
-        effects: { population: 8, government: -12, paranoia: 3 },
+        id: 'archive_fire',
+        text: 'Incêndio atinge arquivos históricos em instituição pública, e revela infraestrutura precária',
+        effects: { population: 10, government: -10, paranoia: 5 },
         hiddenEffects: true
       }
     ]
   },
 
-  // Rodada 5 - Assistente
+  // Rodada 5 - Informante
   {
-    id: 'assist_3',
+    id: 'informant_massacre',
+    type: 'informante',
+    title: 'Imagens de um massacre promovido por milícias ligadas ao governo foram obtidas com exclusividade',
+    description: 'Evidências exclusivas de violência extrema cometida por forças governamentais.',
+    choices: [
+      {
+        id: 'publish',
+        text: 'DIVULGAR',
+        effects: { population: 25, government: -25, paranoia: 30 },
+        consequence: 'Será ameaçado de sofrer um atentado a qualquer momento.'
+      },
+      {
+        id: 'censor',
+        text: 'CENSURAR',
+        effects: { population: -25, government: 15, paranoia: -10 }
+      }
+    ]
+  },
+
+  // Rodada 6 - Assistente
+  {
+    id: 'assistant_events_2',
     type: 'assistente',
     title: 'Últimas Notícias',
-    description: 'Seu assistente preparou 3 manchetes importantes:',
+    description: 'Meu assistente chegou com 3 notícias, preciso escolher uma delas para publicar ainda hoje',
     choices: [
       {
-        id: 'assist_3_scandal',
-        text: '"Escândalo no ministério da saúde exposto"',
-        effects: { population: 15, government: -18, paranoia: 2 },
+        id: 'military_parade',
+        text: 'Desfile militar impressiona população e reforça sentimento patriótico',
+        effects: { population: -10, government: 10, paranoia: 0 },
         hiddenEffects: true
       },
       {
-        id: 'assist_3_sports',
-        text: '"Seleção nacional vence copa internacional"',
-        effects: { population: 8, government: 12, paranoia: -2 },
+        id: 'community_garden',
+        text: 'Moradores revitalizam praça e criam horta comunitária',
+        effects: { population: 5, government: -5, paranoia: 0 },
         hiddenEffects: true
       },
       {
-        id: 'assist_3_weather',
-        text: '"Chuvas intensas afetam região metropolitana"',
-        effects: { population: 0, government: -3, paranoia: 0 },
+        id: 'fuel_shortage',
+        text: 'Falta de combustível gera filas e tensão nos postos',
+        effects: { population: 5, government: -5, paranoia: 0 },
         hiddenEffects: true
-      }
-    ]
-  },
-
-  // Rodada 6 - Informante
-  {
-    id: 'inform_2',
-    type: 'informante',
-    title: 'Massacre Encoberto',
-    description: 'Informante revela massacre de civis em região rural, totalmente ignorado pela mídia oficial. Esta seria uma bombástica denúncia.',
-    choices: [
-      {
-        id: 'inform_2_publish',
-        text: 'PUBLICAR - Expor o massacre',
-        effects: { population: 22, government: -25, paranoia: 4 },
-        consequence: 'Você será hospitalizado e perderá a próxima rodada'
-      },
-      {
-        id: 'inform_2_ignore',
-        text: 'IGNORAR - Manter silêncio sobre o massacre',
-        effects: { population: -15, government: 8, paranoia: -1 }
       }
     ]
   },
 
   // Rodada 7 - Agente
   {
-    id: 'agent_2',
+    id: 'government_surveillance',
     type: 'agente',
-    title: 'Operação Anti-Terrorismo',
-    description: 'Agente oferece matéria exclusiva: "Operação do governo desarticula célula terrorista". A matéria justificaria operações militares em bairros populares.',
+    title: 'Novas câmeras inteligentes são instaladas para garantir a segurança de todos',
+    description: 'O governo concluiu a instalação de um sistema nacional de vigilância com reconhecimento facial, que promete identificar ameaças antes que elas ocorram. A medida é considerada essencial para preservar a ordem.',
     choices: [
       {
-        id: 'agent_2_publish',
-        text: 'PUBLICAR - Apoiar operação governamental',
-        effects: { population: -12, government: 18, paranoia: -4 }
+        id: 'publish',
+        text: 'PUBLICAR',
+        effects: { population: -15, government: 15, paranoia: -10 },
+        consequence: 'O governo reduzirá o monitoramento constante da sua residência.'
       },
       {
-        id: 'agent_2_ignore',
-        text: 'IGNORAR - Recusar publicar propaganda',
-        effects: { population: 8, government: -12, paranoia: 5 }
+        id: 'ignore',
+        text: 'IGNORAR',
+        effects: { population: 10, government: -10, paranoia: 5 }
       }
     ]
   },
 
-  // Rodada 8 - Assistente
+  // Rodada 8 - Informante
   {
-    id: 'assist_4',
-    type: 'assistente',
-    title: 'Destaques da Semana',
-    description: 'Três opções de manchete para destacar hoje:',
+    id: 'informant_children_detained',
+    type: 'informante',
+    title: 'Crianças são detidas por desenharem cartazes contra o governo na escola',
+    description: 'Segundo testemunhas, agentes invadiram uma escola pública e levaram três estudantes de 10 a 12 anos para interrogatório após desenhos considerados subversivos. Professores que tentaram intervir foram afastados.',
     choices: [
       {
-        id: 'assist_4_crime',
-        text: '"Taxa de criminalidade cai 15% na capital"',
-        effects: { population: 5, government: 10, paranoia: -1 },
-        hiddenEffects: true
+        id: 'publish',
+        text: 'DIVULGAR',
+        effects: { population: 20, government: -20, paranoia: 15 },
+        consequence: 'Seus sobrinhos serão impedidos de frequentar a escola até nova ordem.'
       },
       {
-        id: 'assist_4_strike',
-        text: '"Greve dos professores entra no segundo mês"',
-        effects: { population: 12, government: -10, paranoia: 1 },
-        hiddenEffects: true
-      },
-      {
-        id: 'assist_4_tech',
-        text: '"Empresa nacional lança tecnologia inovadora"',
-        effects: { population: 3, government: 7, paranoia: 0 },
-        hiddenEffects: true
+        id: 'censor',
+        text: 'CENSURAR',
+        effects: { population: -20, government: 10, paranoia: -10 }
       }
     ]
   },
 
   // Rodada 9 - Assistente
   {
-    id: 'assist_5',
+    id: 'assistant_news_mix',
+    type: 'assistente',
+    title: 'Destaques da Semana',
+    description: 'Meu assistente chegou com 3 notícias, preciso escolher uma delas para publicar ainda hoje',
+    choices: [
+      {
+        id: 'border_reinforcement',
+        text: 'Governo reforça fronteiras para impedir entrada de "elementos indesejáveis"',
+        effects: { population: -10, government: 10, paranoia: 5 },
+        hiddenEffects: true
+      },
+      {
+        id: 'energy_rationing',
+        text: 'Novo plano de racionamento de energia promete aliviar gastos do Estado',
+        effects: { population: -5, government: 5, paranoia: 0 },
+        hiddenEffects: true
+      },
+      {
+        id: 'trash_strike',
+        text: 'Greve de coletores de lixo causa acúmulo de resíduos na capital',
+        effects: { population: 5, government: -5, paranoia: 5 },
+        hiddenEffects: true
+      }
+    ]
+  },
+
+  // Rodada 10 - Assistente
+  {
+    id: 'assistant_updates',
     type: 'assistente',
     title: 'Edição Vespertina',
-    description: 'Seu assistente selecionou estas 3 notícias relevantes:',
+    description: 'Meu assistente chegou com 3 notícias, preciso escolher uma delas para publicar ainda hoje',
     choices: [
       {
-        id: 'assist_5_health',
-        text: '"Sistema de saúde em colapso por falta de recursos"',
-        effects: { population: 18, government: -20, paranoia: 3 },
+        id: 'internet_instability',
+        text: 'Instabilidade na internet afeta serviços e irrita usuários',
+        effects: { population: 5, government: -5, paranoia: 0 },
         hiddenEffects: true
       },
       {
-        id: 'assist_5_tourism',
-        text: '"Turismo nacional cresce 25% este ano"',
-        effects: { population: 4, government: 8, paranoia: 0 },
+        id: 'national_sports_day',
+        text: 'Dia Nacional do Esporte reúne milhares em atividades promovidas pelo governo',
+        effects: { population: -5, government: 10, paranoia: 0 },
         hiddenEffects: true
       },
       {
-        id: 'assist_5_culture',
-        text: '"Festival cultural reúne milhares na praça central"',
-        effects: { population: 6, government: 2, paranoia: -1 },
+        id: 'public_tv_show',
+        text: 'TV estatal lança novo programa cultural, mas corta verbas de rádios comunitárias',
+        effects: { population: -5, government: 5, paranoia: 0 },
         hiddenEffects: true
       }
     ]
   },
 
-  // Rodada 10 - Informante
+  // Rodada 11 - Informante
   {
-    id: 'inform_3',
+    id: 'informant_secret_prisons',
     type: 'informante',
-    title: 'Desaparecimentos Forçados',
-    description: 'Informante traz lista de pessoas desaparecidas pelo regime. Publicar isso colocaria luz sobre crimes contra humanidade.',
+    title: 'Revelações sobre prisões secretas ampliam medo na população',
+    description: 'Informações confidenciais indicam que o governo mantém centros de detenção clandestinos onde opositores são mantidos sem julgamento e sujeitos a torturas.',
     choices: [
       {
-        id: 'inform_3_publish',
-        text: 'PUBLICAR - Expor os desaparecimentos',
-        effects: { population: 20, government: -22, paranoia: 3 },
-        consequence: 'Sua família será ameaçada'
+        id: 'publish',
+        text: 'DIVULGAR',
+        effects: { population: 25, government: -30, paranoia: 25 },
+        consequence: 'Você será monitorado constantemente e sua família sofrerá ameaças.'
       },
       {
-        id: 'inform_3_ignore',
-        text: 'IGNORAR - Proteger sua família',
-        effects: { population: -10, government: 6, paranoia: -1 }
+        id: 'censor',
+        text: 'CENSURAR',
+        effects: { population: -25, government: 10, paranoia: -10 }
       }
     ]
   },
 
-  // Rodada 11 - Agente
+  // Rodada 12 - Agente
   {
-    id: 'agent_3',
+    id: 'government_media_control',
     type: 'agente',
-    title: 'Sucesso Econômico',
-    description: 'Agente do governo entrega matéria: "Políticas econômicas do governo geram crescimento histórico". Dados questionáveis, mas favoráveis ao regime.',
+    title: 'Nova lei fortalece a comunicação nacional e preserva os valores patrióticos',
+    description: 'O governo aprovou uma lei que regula e fortalece os meios de comunicação, garantindo que as mensagens veiculadas promovam a unidade, o orgulho nacional e a segurança do país.',
     choices: [
       {
-        id: 'agent_3_publish',
-        text: 'PUBLICAR - Apoiar políticas econômicas',
-        effects: { population: -8, government: 20, paranoia: -2 }
+        id: 'publish',
+        text: 'PUBLICAR',
+        effects: { population: -20, government: 20, paranoia: -15 },
+        consequence: 'Sua influência será protegida e o governo reduzirá a vigilância sobre você.'
       },
       {
-        id: 'agent_3_ignore',
-        text: 'IGNORAR - Questionar veracidade dos dados',
-        effects: { population: 6, government: -10, paranoia: 3 }
-      }
-    ]
-  },
-
-  // Rodada 12 - Assistente
-  {
-    id: 'assist_6',
-    type: 'assistente',
-    title: 'Manchetes Urgentes',
-    description: 'Escolha qual dessas 3 notícias será a manchete principal:',
-    choices: [
-      {
-        id: 'assist_6_pollution',
-        text: '"Níveis de poluição atingem índices críticos"',
-        effects: { population: 14, government: -12, paranoia: 2 },
-        hiddenEffects: true
-      },
-      {
-        id: 'assist_6_investment',
-        text: '"Investimento estrangeiro bate recorde histórico"',
-        effects: { population: -1, government: 15, paranoia: 0 },
-        hiddenEffects: true
-      },
-      {
-        id: 'assist_6_housing',
-        text: '"Programa habitacional entrega 5 mil casas populares"',
-        effects: { population: 10, government: 8, paranoia: 0 },
-        hiddenEffects: true
+        id: 'ignore',
+        text: 'IGNORAR',
+        effects: { population: 15, government: -15, paranoia: 10 }
       }
     ]
   },
 
   // Rodada 13 - Assistente
   {
-    id: 'assist_7',
+    id: 'assistant_daily_news',
+    type: 'assistente',
+    title: 'Manchetes Urgentes',
+    description: 'Meu assistente chegou com 3 notícias, preciso escolher uma delas para publicar ainda hoje',
+    choices: [
+      {
+        id: 'public_transport_issues',
+        text: 'Usuários reclamam de superlotação em ônibus durante horários de pico',
+        effects: { population: 5, government: -5, paranoia: 0 },
+        hiddenEffects: true
+      },
+      {
+        id: 'government_civic_campaign',
+        text: 'Campanha governamental incentiva população a economizar água',
+        effects: { population: -5, government: 5, paranoia: 0 },
+        hiddenEffects: true
+      },
+      {
+        id: 'local_market_closure',
+        text: 'Fechamento temporário de mercado local gera insatisfação na comunidade',
+        effects: { population: 5, government: -5, paranoia: 0 },
+        hiddenEffects: true
+      }
+    ]
+  },
+
+  // Rodada 14 - Agente
+  {
+    id: 'government_cybersecurity_law',
+    type: 'agente',
+    title: 'Nova lei de cibersegurança protege a nação contra ameaças externas',
+    description: 'O governo implementou uma legislação importante para combater ataques cibernéticos, impondo monitoramento reforçado de dispositivos com acesso a internet, garantindo a integridade das infraestruturas críticas e a soberania nacional.',
+    choices: [
+      {
+        id: 'publish',
+        text: 'PUBLICAR',
+        effects: { population: -20, government: 20, paranoia: -20 },
+        consequence: 'A fiscalização sobre suas atividades digitais será reduzida.'
+      },
+      {
+        id: 'ignore',
+        text: 'IGNORAR',
+        effects: { population: 15, government: -15, paranoia: 15 }
+      }
+    ]
+  },
+
+  // Rodada 15 - Assistente
+  {
+    id: 'assistant_daily_briefs',
     type: 'assistente',
     title: 'Notícias em Destaque',
-    description: 'Seu assistente preparou estas manchetes para análise:',
+    description: 'Meu assistente chegou com 3 notícias, preciso escolher uma delas para publicar ainda hoje',
     choices: [
       {
-        id: 'assist_7_unemployment',
-        text: '"Desemprego atinge maior patamar em 5 anos"',
-        effects: { population: 16, government: -22, paranoia: 4 },
+        id: 'school_initiative',
+        text: 'Projeto escolar incentiva educação digital, mas gera preocupação com excesso de exposição',
+        effects: { population: -5, government: 5, paranoia: 0 },
         hiddenEffects: true
       },
       {
-        id: 'assist_7_agriculture',
-        text: '"Safra recorde impulsiona economia rural"',
-        effects: { population: 2, government: 12, paranoia: 0 },
+        id: 'city_parking_restrictions',
+        text: 'Novas regras de estacionamento no centro causam protestos de comerciantes',
+        effects: { population: 5, government: -5, paranoia: 0 },
         hiddenEffects: true
       },
       {
-        id: 'assist_7_transport',
-        text: '"Nova linha de metrô é inaugurada"',
-        effects: { population: 7, government: 6, paranoia: -1 },
-        hiddenEffects: true
-      }
-    ]
-  },
-
-  // Rodada 14 - Informante
-  {
-    id: 'inform_4',
-    type: 'informante',
-    title: 'Corrupção na Cúpula',
-    description: 'Documentos revelam esquema bilionário de desvio de verbas públicas pelos principais líderes do governo.',
-    choices: [
-      {
-        id: 'inform_4_publish',
-        text: 'PUBLICAR - Expor a corrupção',
-        effects: { population: 25, government: -30, paranoia: 5 },
-        consequence: 'Você será preso na próxima rodada'
-      },
-      {
-        id: 'inform_4_ignore',
-        text: 'IGNORAR - Evitar confronto direto',
-        effects: { population: -18, government: 10, paranoia: -2 }
-      }
-    ]
-  },
-
-  // Rodada 15 - Agente
-  {
-    id: 'agent_4',
-    type: 'agente',
-    title: 'Ordem e Progresso',
-    description: 'Agente propõe matéria: "Governo restaura ordem nacional e elimina elementos subversivos". Propaganda direta sobre as "conquistas" do regime autoritário.',
-    choices: [
-      {
-        id: 'agent_4_publish',
-        text: 'PUBLICAR - Promover a propaganda oficial',
-        effects: { population: -15, government: 25, paranoia: -5 }
-      },
-      {
-        id: 'agent_4_ignore',
-        text: 'IGNORAR - Manter independência jornalística',
-        effects: { population: 10, government: -15, paranoia: 6 }
-      }
-    ]
-  },
-
-  // Rodada 16 - Assistente
-  {
-    id: 'assist_8',
-    type: 'assistente',
-    title: 'Últimas do Dia',
-    description: 'Três opções finais de manchete para hoje:',
-    choices: [
-      {
-        id: 'assist_8_violence',
-        text: '"Violência urbana cresce 30% no último semestre"',
-        effects: { population: 20, government: -25, paranoia: 5 },
-        hiddenEffects: true
-      },
-      {
-        id: 'assist_8_energy',
-        text: '"Novo projeto energético promete autonomia nacional"',
-        effects: { population: 1, government: 18, paranoia: -1 },
-        hiddenEffects: true
-      },
-      {
-        id: 'assist_8_elderly',
-        text: '"Programa para terceira idade é ampliado"',
-        effects: { population: 8, government: 5, paranoia: 0 },
+        id: 'local_park_cleanup',
+        text: 'Mutirão comunitário para limpeza de parque público enfrenta dificuldades com falta de recursos',
+        effects: { population: 5, government: -5, paranoia: 0 },
         hiddenEffects: true
       }
     ]
