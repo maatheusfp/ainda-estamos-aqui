@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Courier+Prime:wght@400;700&family=Playfair+Display:wght@400;700;900&family=Crimson+Text:wght@400;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,56 +8,57 @@
 
 @layer base {
   :root {
-    /* Dark journalistic theme */
-    --background: 220 13% 8%;
-    --foreground: 210 40% 92%;
+    /* Newspaper theme - light and classic */
+    --background: 45 20% 96%;
+    --foreground: 0 0% 15%;
 
-    --card: 220 13% 12%;
-    --card-foreground: 210 40% 92%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
 
-    --popover: 220 13% 12%;
-    --popover-foreground: 210 40% 92%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
 
-    /* Government red theme */
-    --primary: 0 65% 45%;
-    --primary-foreground: 210 40% 98%;
+    /* Government red theme - darker for contrast */
+    --primary: 0 65% 35%;
+    --primary-foreground: 0 0% 98%;
 
-    /* Population blue theme */
-    --secondary: 210 85% 55%;
-    --secondary-foreground: 220 13% 8%;
+    /* Population blue theme - darker for contrast */
+    --secondary: 210 75% 45%;
+    --secondary-foreground: 0 0% 98%;
 
-    /* Neutral grays */
-    --muted: 220 13% 16%;
-    --muted-foreground: 210 15% 65%;
+    /* Neutral newspaper grays */
+    --muted: 45 15% 90%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 45 95% 70%;
-    --accent-foreground: 220 13% 8%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
 
     /* Government warnings */
-    --destructive: 0 75% 55%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 45%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 20%;
-    --input: 220 13% 16%;
-    --ring: 210 85% 55%;
+    --border: 0 0% 80%;
+    --input: 0 0% 98%;
+    --ring: 0 0% 20%;
 
-    /* Paranoia yellow theme */
-    --warning: 45 95% 70%;
-    --warning-foreground: 220 13% 8%;
+    /* Paranoia yellow theme - darker for contrast */
+    --warning: 45 85% 55%;
+    --warning-foreground: 0 0% 15%;
 
     /* Game specific colors */
-    --government: 0 65% 45%;
-    --government-foreground: 210 40% 98%;
-    --population: 210 85% 55%;
-    --population-foreground: 220 13% 8%;
-    --paranoia: 45 95% 70%;
-    --paranoia-foreground: 220 13% 8%;
+    --government: 0 65% 35%;
+    --government-foreground: 0 0% 98%;
+    --population: 210 75% 45%;
+    --population-foreground: 0 0% 98%;
+    --paranoia: 45 85% 55%;
+    --paranoia-foreground: 0 0% 15%;
 
     --radius: 0.25rem;
 
     /* Typography */
     --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-    --font-serif: 'Courier Prime', 'Times New Roman', serif;
+    --font-serif: 'Playfair Display', 'Times New Roman', serif;
+    --font-newspaper: 'Crimson Text', 'Georgia', serif;
 
     /* Animations */
     --transition-base: all 0.2s ease-in-out;
@@ -75,6 +76,21 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-newspaper;
+  }
+}
+
+@layer components {
+  .newspaper-style {
+    background-image: 
+      linear-gradient(90deg, transparent 0px, transparent 1px, rgba(0,0,0,0.04) 1px, rgba(0,0,0,0.04) 2px, transparent 2px),
+      linear-gradient(rgba(0,0,0,0.02) 0px, transparent 1px);
+    background-size: 100% 1.2em;
+  }
+  
+  .newspaper-columns {
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 1px solid hsl(var(--border));
   }
 }

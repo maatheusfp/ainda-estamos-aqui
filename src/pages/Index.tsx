@@ -58,14 +58,18 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-serif font-bold mb-2 text-foreground">
-            AINDA ESTAMOS AQUI
+        {/* Header estilo jornal */}
+        <div className="text-center mb-8 border-b-4 border-foreground pb-6">
+          <h1 className="text-6xl font-serif font-black mb-4 text-foreground uppercase tracking-widest">
+            Ainda Estamos Aqui
           </h1>
-          <p className="text-muted-foreground font-mono text-sm mb-4">
-            Rodada {gameState.round + 1} de {16} • Jornalista em Regime Autoritário
-          </p>
+          <div className="flex justify-center items-center gap-4 mb-4">
+            <div className="h-px bg-foreground flex-1"></div>
+            <p className="text-foreground font-mono text-sm uppercase tracking-wider px-4">
+              Edição {gameState.round + 1} de 16 • Jornalista em Regime Autoritário
+            </p>
+            <div className="h-px bg-foreground flex-1"></div>
+          </div>
         </div>
 
         {/* Pontuações */}

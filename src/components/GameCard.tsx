@@ -68,54 +68,79 @@ export const GameCard = ({ card, onChoice, isSkipped = false }: GameCardProps) =
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto">
       <div className={cn(
-        "p-6 border-2 rounded-lg transition-all duration-300",
-        getCardTypeColor(card.type),
-        "shadow-lg"
+        "p-8 border-4 border-foreground bg-card transition-all duration-300",
+        "shadow-xl newspaper-style"
       )}>
-        <div className="mb-4">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-xs font-mono font-bold text-muted-foreground">
+        {/* Header do jornal */}
+        <div className="border-b-4 border-foreground mb-6 pb-4">
+          <div className="flex justify-between items-center">
+            <span className="text-sm font-mono font-bold text-foreground uppercase tracking-wider">
               {getCardTypeLabel(card.type)}
             </span>
-            <span className="text-xs font-mono text-muted-foreground">
-              {card.type === 'assistente' && 'EFEITOS OCULTOS'}
-              {card.type === 'informante' && 'CONSEQUÊNCIAS PESSOAIS'}
-              {card.type === 'agente' && 'APENAS PONTUAÇÃO'}
+            <span className="text-sm font-mono text-foreground uppercase tracking-wider">
+              EDIÇÃO ESPECIAL
             </span>
           </div>
-          <h2 className="text-xl font-serif font-bold mb-3 text-foreground">
+        </div>
+
+        {/* Manchete principal */}
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl font-serif font-black mb-4 text-foreground uppercase tracking-wide leading-tight">
             {card.title}
-          </h2>
-          <p className="text-foreground/90 leading-relaxed">
+          </h1>
+          <div className="w-full h-1 bg-foreground mb-6"></div>
+          <p className="text-lg font-newspaper leading-relaxed text-foreground max-w-3xl mx-auto">
             {card.description}
           </p>
         </div>
 
-        <div className="space-y-3">
-          {card.choices.map((choice) => (
-            <Button
-              key={choice.id}
-              variant="outline"
-              className={cn(
-                "w-full text-left justify-start p-4 h-auto transition-all duration-200",
-                "hover:bg-muted/20 hover:border-ring/50",
-                selectedChoice === choice.id && "bg-ring/10 border-ring"
-              )}
-              onClick={() => handleChoice(choice)}
-              disabled={selectedChoice !== null}
-            >
-              <div className="flex flex-col gap-1">
-                <span className="font-medium">{choice.text}</span>
-                {choice.consequence && (
-                  <span className="text-xs text-destructive/80 font-mono">
-                    AVISO: {choice.consequence}
-                  </span>
+        {/* Área de decisões estilo jornal */}
+        <div className="border-t-2 border-foreground pt-6">
+          <h3 className="text-xl font-serif font-bold mb-4 text-center text-foreground uppercase">
+            {card.type === 'assistente' ? 'Escolha a manchete para publicar' : 'Decisão editorial'}
+          </h3>
+          <div className={cn(
+            "grid gap-4",
+            card.type === 'assistente' ? "grid-cols-1 md:grid-cols-3" : "grid-cols-2"
+          )}>
+            {card.choices.map((choice, index) => (
+              <Button
+                key={choice.id}
+                variant="outline"
+                className={cn(
+                  "h-auto p-6 border-2 border-foreground bg-card hover:bg-muted/30",
+                  "transition-all duration-200 text-left justify-start",
+                  selectedChoice === choice.id && "bg-foreground text-background",
+                  card.type === 'assistente' ? "min-h-[120px]" : "min-h-[100px]"
                 )}
-              </div>
-            </Button>
-          ))}
+                onClick={() => handleChoice(choice)}
+                disabled={selectedChoice !== null}
+              >
+                <div className="flex flex-col gap-2 w-full">
+                  {card.type === 'assistente' ? (
+                    <div className="text-center">
+                      <span className="font-serif font-bold text-base leading-tight block">
+                        {choice.text}
+                      </span>
+                    </div>
+                  ) : (
+                    <>
+                      <span className="font-serif font-bold text-xl uppercase tracking-wide">
+                        {choice.text}
+                      </span>
+                      {choice.consequence && (
+                        <span className="text-sm text-destructive font-mono italic">
+                          {choice.consequence}
+                        </span>
+                      )}
+                    </>
+                  )}
+                </div>
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

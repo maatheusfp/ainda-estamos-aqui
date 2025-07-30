@@ -21,6 +21,7 @@ export default {
 			fontFamily: {
 				'mono': 'var(--font-mono)',
 				'serif': 'var(--font-serif)',
+				'newspaper': 'var(--font-newspaper)',
 			},
 			colors: {
 				border: 'hsl(var(--border))',
