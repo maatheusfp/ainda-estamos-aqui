@@ -110,10 +110,10 @@ export const GameCard = ({ card, onChoice, isSkipped = false }: GameCardProps) =
                 key={choice.id}
                 variant="outline"
                 className={cn(
-                  "h-auto p-6 border-2 border-foreground bg-card hover:bg-muted/30",
-                  "transition-all duration-200 text-left justify-start",
+                  "h-auto p-4 border-2 border-foreground bg-card hover:bg-muted/30",
+                  "transition-all duration-200 text-left justify-start overflow-hidden",
                   selectedChoice === choice.id && "bg-foreground text-background",
-                  card.type === 'assistente' ? "min-h-[120px]" : "min-h-[100px]"
+                  card.type === 'assistente' ? "min-h-[100px]" : "min-h-[80px]"
                 )}
                 onClick={() => handleChoice(choice)}
                 disabled={selectedChoice !== null}
@@ -121,17 +121,17 @@ export const GameCard = ({ card, onChoice, isSkipped = false }: GameCardProps) =
                 <div className="flex flex-col gap-2 w-full">
                   {card.type === 'assistente' ? (
                     <div className="text-center">
-                      <span className="font-serif font-bold text-base leading-tight block">
+                      <span className="font-serif font-bold text-sm leading-tight block break-words">
                         {choice.text}
                       </span>
                     </div>
                   ) : (
                     <>
-                      <span className="font-serif font-bold text-xl uppercase tracking-wide">
+                      <span className="font-serif font-bold text-lg uppercase tracking-wide break-words">
                         {choice.text}
                       </span>
                       {choice.consequence && (
-                        <span className="text-sm text-destructive font-mono italic">
+                        <span className="text-xs text-destructive font-mono italic break-words">
                           {choice.consequence}
                         </span>
                       )}
