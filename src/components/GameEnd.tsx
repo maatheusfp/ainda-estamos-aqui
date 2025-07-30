@@ -75,9 +75,31 @@ export const GameEnd = ({ gameState, playerData, decisions, onRestart, gameStart
 
   
   const handleDownloadData = () => {
-    const startTime = gameStartTime || new Date(playerData.startTime);
-    const sessionData = exportSessionData(playerData, gameState, decisions, startTime);
-    downloadSessionData(sessionData);
+    try {
+      const startTime = gameStartTime || new Date(playerData.startTime);
+      const sessionData = exportSessionData(playerData, gameState, decisions, startTime);
+      downloadSessionData(sessionData);
+    } catch (error) {
+      console.error('Erro ao baixar dados:', error);
+      // Fallback simples
+      const simpleData = {
+        playerData,
+        decisions,
+        finalScores: gameState.scores,
+        finalOutcome: outcome.title,
+        timestamp: new Date().toISOString()
+      };
+      const jsonString = JSON.stringify(simpleData, null, 2);
+      const blob = new Blob([jsonString], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `sessao_jogo_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
   };
 
   return (
@@ -152,12 +174,20 @@ export const GameEnd = ({ gameState, playerData, decisions, onRestart, gameStart
             ID da Sessão: {playerData.sessionId}
           </p>
           
-          <div className="flex gap-3">
-            <Button onClick={handleDownloadData} variant="default" className="flex-1 font-mono">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button 
+              onClick={handleDownloadData} 
+              variant="default" 
+              className="flex-1 font-mono bg-primary text-primary-foreground hover:bg-primary/90 border-2 border-foreground"
+            >
               <Download className="mr-2 h-4 w-4" />
               BAIXAR DADOS JSON
             </Button>
-            <Button onClick={onRestart} variant="outline" className="flex-1 font-mono">
+            <Button 
+              onClick={onRestart} 
+              variant="outline" 
+              className="flex-1 font-mono border-2 border-foreground hover:bg-muted/30"
+            >
               JOGAR NOVAMENTE
             </Button>
           </div>
