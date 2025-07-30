@@ -1,15 +1,19 @@
 import { GameState, PlayerData, DecisionMetric } from '@/types/game';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { useSessionData } from '@/hooks/useSessionData';
+import { Download } from 'lucide-react';
 
 interface GameEndProps {
   gameState: GameState;
   playerData: PlayerData;
   decisions: DecisionMetric[];
   onRestart: () => void;
+  gameStartTime?: Date;
 }
 
-export const GameEnd = ({ gameState, playerData, decisions, onRestart }: GameEndProps) => {
+export const GameEnd = ({ gameState, playerData, decisions, onRestart, gameStartTime }: GameEndProps) => {
+  const { exportSessionData, downloadSessionData } = useSessionData();
   const getFinalOutcome = (scores: GameState['scores']) => {
     const { population, government } = scores;
     const difference = Math.abs(population - government);
@@ -69,16 +73,12 @@ export const GameEnd = ({ gameState, playerData, decisions, onRestart }: GameEnd
     }
   };
 
-  // Preparar dados para envio ao backend (simulado)
-  const sessionData = {
-    playerData,
-    decisions,
-    finalScores: gameState.scores,
-    finalOutcome: outcome.title,
-    totalTime
+  
+  const handleDownloadData = () => {
+    const startTime = gameStartTime || new Date(playerData.startTime);
+    const sessionData = exportSessionData(playerData, gameState, decisions, startTime);
+    downloadSessionData(sessionData);
   };
-
-  console.log('Dados da sessão para análise:', sessionData);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
@@ -152,9 +152,15 @@ export const GameEnd = ({ gameState, playerData, decisions, onRestart }: GameEnd
             ID da Sessão: {playerData.sessionId}
           </p>
           
-          <Button onClick={onRestart} variant="outline" className="w-full font-mono">
-            JOGAR NOVAMENTE
-          </Button>
+          <div className="flex gap-3">
+            <Button onClick={handleDownloadData} variant="default" className="flex-1 font-mono">
+              <Download className="mr-2 h-4 w-4" />
+              BAIXAR DADOS JSON
+            </Button>
+            <Button onClick={onRestart} variant="outline" className="flex-1 font-mono">
+              JOGAR NOVAMENTE
+            </Button>
+          </div>
         </Card>
       </div>
     </div>

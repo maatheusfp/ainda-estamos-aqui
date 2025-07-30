@@ -5,11 +5,13 @@ import { GameCard } from '@/components/GameCard';
 import { ScoreDisplay } from '@/components/ScoreDisplay';
 import { GameEnd } from '@/components/GameEnd';
 import { useGameLogic } from '@/hooks/useGameLogic';
+import { useSessionData } from '@/hooks/useSessionData';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
   const [playerData, setPlayerData] = useState<PlayerData | null>(null);
   const [gameStarted, setGameStarted] = useState(false);
+  const [gameStartTime] = useState<Date>(new Date());
   
   const {
     gameState,
@@ -19,6 +21,8 @@ const Index = () => {
     shouldSkipCurrentRound,
     resetGame
   } = useGameLogic(playerData);
+  
+  const { exportSessionData, downloadSessionData } = useSessionData();
 
   const handleDemographicSubmit = (data: PlayerData) => {
     setPlayerData(data);
@@ -48,6 +52,7 @@ const Index = () => {
         playerData={playerData}
         decisions={decisions}
         onRestart={handleRestart}
+        gameStartTime={gameStartTime}
       />
     );
   }
