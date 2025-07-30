@@ -365,6 +365,3 @@ export const gameCards: Card[] = [
     ]
   }
 ];
-
-// Re-exporting the constants from the original file for completeness
-export { CARD_TYPES };
