@@ -1,63 +1,126 @@
-# Welcome to your Lovable project
+# Ainda Estamos Aqui - Jogo de Decisões Autoritárias
 
-## Project info
+Este é um jogo sério desenvolvido para pesquisa acadêmica sobre tomada de decisões em contextos autoritários.
 
-**URL**: https://lovable.dev/projects/205f2ab6-a0fb-4449-b2cd-409676d4f29e
+## 🎯 Objetivo do Projeto
 
-## How can I edit this code?
+O jogo simula a experiência de um jornalista trabalhando sob um regime autoritário, coletando dados sobre como jogadores tomam decisões morais sob pressão.
 
-There are several ways of editing your application.
+## ✨ Funcionalidades
 
-**Use Lovable**
+- **Jogo Interativo**: 16 rounds de decisões como jornalista
+- **Coleta de Dados**: Sistema automático de envio de dados por email
+- **Interface Responsiva**: Design adaptado para diferentes dispositivos
+- **Análise Comportamental**: Métricas detalhadas de tempo e escolhas
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/205f2ab6-a0fb-4449-b2cd-409676d4f29e) and start prompting.
+## 📧 Sistema de Coleta de Dados
 
-Changes made via Lovable will be committed automatically to this repo.
+O jogo envia **automaticamente** os dados das sessões por email ao final de cada partida, facilitando a pesquisa acadêmica:
 
-**Use your preferred IDE**
+- **Envio Automático**: Dados são enviados automaticamente quando o jogo termina
+- **Sem Interação**: Não requer ação do usuário, processo totalmente transparente
+- **Formato Detalhado**: Inclui métricas de tempo, decisões e pontuações
+- **Backup Seguro**: Dados não são perdidos se o jogador fechar o navegador
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Configuração do Email
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. Configure uma conta no [EmailJS](https://www.emailjs.com/)
+2. Crie as variáveis de ambiente (veja `.env.example`)
+3. Configure o email de destino no código
+4. Veja `SIMPLE_EMAIL_TEMPLATE.md` para o template
 
-Follow these steps:
+## 🚀 Como Executar
+
+### Passos de Instalação
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# 1. Clone o repositório
+git clone <URL_DO_REPOSITORIO>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 2. Navegue para o diretório
+cd ainda-estamos-aqui
 
-# Step 3: Install the necessary dependencies.
-npm i
+# 3. Instale as dependências
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 4. Configure as variáveis de ambiente
+cp .env.example .env.local
+# Edite .env.local com suas credenciais do EmailJS
+
+# 5. Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 🛠️ Tecnologias Utilizadas
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- **Frontend**: React + TypeScript + Vite
+- **UI**: shadcn/ui + Tailwind CSS
+- **Email**: EmailJS para envio automático de dados
+- **Hooks**: React hooks customizados para lógica do jogo
 
-**Use GitHub Codespaces**
+## 📁 Estrutura do Projeto
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+src/
+├── components/          # Componentes React
+│   ├── ui/             # Componentes da interface
+│   ├── DemographicForm.tsx
+│   ├── GameCard.tsx
+│   ├── GameEnd.tsx     # Tela final com envio de dados
+│   └── ScoreDisplay.tsx
+├── hooks/              # Hooks customizados
+│   ├── useGameLogic.ts
+│   ├── useSessionData.ts
+│   └── useSimpleEmailSender.ts
+├── pages/              # Páginas da aplicação
+├── types/              # Definições TypeScript
+└── data/               # Dados das cartas do jogo
+```
 
-## What technologies are used for this project?
+## 📊 Dados Coletados
 
-This project is built with:
+O sistema coleta automaticamente:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
+- **Demografia**: Idade, gênero
+- **Comportamento**: Tempo de decisão, escolhas feitas
+- **Métricas**: Pontuações finais, consequências
+- **Sessão**: Duração total, número de rounds
+
+## 🔧 Configuração para Pesquisa
+
+### Variáveis de Ambiente
+
+Configure no `.env.local`:
+
+```env
+VITE_EMAILJS_SERVICE_ID=seu_service_id
+VITE_EMAILJS_TEMPLATE_ID=seu_template_id
+VITE_EMAILJS_PUBLIC_KEY=sua_public_key
+VITE_RECIPIENT_EMAIL=seu-email@universidade.br
+VITE_FROM_NAME=Sistema Ainda Estamos Aqui
+```
+
+## 📚 Documentação Adicional
+
+- `EMAIL_DATA_COLLECTION.md` - Configuração detalhada do sistema de email
+- `SIMPLE_EMAIL_TEMPLATE.md` - Template para EmailJS
+- `EMAILJS_SETUP.md` - Guia completo de configuração
+
+## 🎮 Como Jogar
+
+1. Acesse a aplicação
+2. Preencha os dados demográficos
+3. Tome decisões como jornalista em regime autoritário
+4. Complete os 16 rounds
+5. **Os dados são enviados automaticamente** - sem necessidade de ação adicional
+
+## 🤝 Contribuição
+
+Este projeto é parte de pesquisa acadêmica da UFPE. Para contribuições, entre em contato com os pesquisadores responsáveis.
+
+## 📄 Licença
+
+Projeto acadêmico - Universidade Federal de Pernambuco - Centro de Informática
 - Tailwind CSS
 
 ## How can I deploy this project?

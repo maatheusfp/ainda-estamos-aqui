@@ -1,8 +1,11 @@
+import { useEffect, useMemo, useRef } from 'react';
 import { GameState, PlayerData, DecisionMetric } from '@/types/game';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useSessionData } from '@/hooks/useSessionData';
-import { Download } from 'lucide-react';
+import { useSimpleEmailSender } from '@/hooks/useSimpleEmailSender';
+import { Mail, AlertCircle, CheckCircle, RefreshCw } from 'lucide-react';
 
 interface GameEndProps {
   gameState: GameState;
@@ -13,7 +16,51 @@ interface GameEndProps {
 }
 
 export const GameEnd = ({ gameState, playerData, decisions, onRestart, gameStartTime }: GameEndProps) => {
-  const { exportSessionData, downloadSessionData } = useSessionData();
+  const { exportSessionData } = useSessionData();
+  const { sendSessionDataByEmail, isLoading, status, clearStatus } = useSimpleEmailSender();
+  
+  // Usar sessionId como chave única para evitar re-envios
+  const sessionKey = `sent_${playerData.sessionId}`;
+  const hasSentData = useRef(false);
+  
+  // Configuração do email (memoizada para evitar re-renders desnecessários)
+  const emailConfig = useMemo(() => ({
+    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID',
+    templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
+    publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY',
+    recipientEmail: import.meta.env.VITE_RECIPIENT_EMAIL || 'pesquisa.jogos@ufpe.br'
+  }), []);
+
+  // Envio automático dos dados quando o componente é montado (apenas uma vez por sessão)
+  useEffect(() => {
+    // Verificar se já enviou os dados para esta sessão específica
+    if (hasSentData.current || sessionStorage.getItem(sessionKey)) {
+      return;
+    }
+
+    const sendDataAutomatically = async () => {
+      try {
+        hasSentData.current = true;
+        sessionStorage.setItem(sessionKey, 'true'); // Marcar no sessionStorage também
+        
+        const startTime = gameStartTime || new Date(playerData.startTime);
+        const sessionData = exportSessionData(playerData, gameState, decisions, startTime);
+        
+        await sendSessionDataByEmail(sessionData, emailConfig);
+      } catch (error) {
+        console.error('Erro ao enviar dados automaticamente:', error);
+        hasSentData.current = false;
+        sessionStorage.removeItem(sessionKey); // Remover marca em caso de erro
+      }
+    };
+
+    // Enviar dados após um pequeno delay para dar tempo da tela carregar
+    const timer = setTimeout(() => {
+      sendDataAutomatically();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [sessionKey, gameStartTime, playerData, gameState, decisions, exportSessionData, sendSessionDataByEmail, emailConfig]);
   const getFinalOutcome = (scores: GameState['scores']) => {
     const { population, government } = scores;
     const difference = Math.abs(population - government);
@@ -70,35 +117,6 @@ export const GameEnd = ({ gameState, playerData, decisions, onRestart, gameStart
         return 'border-destructive/50 bg-destructive/5 text-destructive';
       default:
         return 'border-muted/50 bg-muted/5 text-muted-foreground';
-    }
-  };
-
-  
-  const handleDownloadData = () => {
-    try {
-      const startTime = gameStartTime || new Date(playerData.startTime);
-      const sessionData = exportSessionData(playerData, gameState, decisions, startTime);
-      downloadSessionData(sessionData);
-    } catch (error) {
-      console.error('Erro ao baixar dados:', error);
-      // Fallback simples
-      const simpleData = {
-        playerData,
-        decisions,
-        finalScores: gameState.scores,
-        finalOutcome: outcome.title,
-        timestamp: new Date().toISOString()
-      };
-      const jsonString = JSON.stringify(simpleData, null, 2);
-      const blob = new Blob([jsonString], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `sessao_jogo_${new Date().toISOString().split('T')[0]}.json`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
     }
   };
 
@@ -166,7 +184,7 @@ export const GameEnd = ({ gameState, playerData, decisions, onRestart, gameStart
         <Card className="p-6 text-center">
           <h3 className="font-serif font-bold text-lg mb-2">Obrigado pela Participação!</h3>
           <p className="text-muted-foreground mb-4">
-            Seus dados contribuirão para pesquisas sobre tomada de decisão em contextos autoritários.
+            Seus dados estão sendo enviados automaticamente para análise e contribuirão para pesquisas sobre tomada de decisão em contextos autoritários.
           </p>
           <p className="text-xs text-muted-foreground font-mono mb-4">
             Universidade Federal de Pernambuco - Centro de Informática<br/>
@@ -174,20 +192,53 @@ export const GameEnd = ({ gameState, playerData, decisions, onRestart, gameStart
             ID da Sessão: {playerData.sessionId}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button 
-              onClick={handleDownloadData} 
-              variant="default" 
-              className="flex-1 font-mono bg-primary text-primary-foreground hover:bg-primary/90 border-2 border-foreground"
-            >
-              <Download className="mr-2 h-4 w-4" />
-              BAIXAR DADOS JSON
-            </Button>
+          {/* Status do envio automático */}
+          <div className="mb-4">
+            {isLoading && (
+              <Alert className="border-blue-500">
+                <RefreshCw className="h-4 w-4 animate-spin" />
+                <AlertDescription className="text-blue-700">
+                  Enviando dados da sessão automaticamente...
+                </AlertDescription>
+              </Alert>
+            )}
+            
+            {status.message && !isLoading && (
+              <Alert className={`${status.type === 'error' ? 'border-red-500' : 'border-green-500'}`}>
+                {status.type === 'error' ? (
+                  <AlertCircle className="h-4 w-4" />
+                ) : (
+                  <CheckCircle className="h-4 w-4" />
+                )}
+                <AlertDescription className={status.type === 'error' ? 'text-red-700' : 'text-green-700'}>
+                  {status.message}
+                  {status.type === 'success' && (
+                    <>
+                      <br />
+                      <span className="text-sm">Dados enviados para: {emailConfig.recipientEmail}</span>
+                    </>
+                  )}
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {!isLoading && !status.message && (
+              <Alert className="border-gray-500">
+                <Mail className="h-4 w-4" />
+                <AlertDescription className="text-gray-700">
+                  Os dados desta sessão serão enviados automaticamente em alguns segundos...
+                </AlertDescription>
+              </Alert>
+            )}
+          </div>
+          
+          <div className="flex justify-center">
             <Button 
               onClick={onRestart} 
               variant="outline" 
-              className="flex-1 font-mono border-2 border-foreground hover:bg-muted/30"
+              className="font-mono border-2 border-foreground hover:bg-muted/30 px-8"
             >
+              <RefreshCw className="mr-2 h-4 w-4" />
               JOGAR NOVAMENTE
             </Button>
           </div>
