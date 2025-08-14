@@ -108,6 +108,8 @@ export const DemographicForm = ({ onSubmit }: DemographicFormProps) => {
               </div>
             </div>
 
+            {/*
+
             <div>
               <Label className="font-mono mt-4 block">
                 Posicionamento Político
@@ -153,6 +155,8 @@ export const DemographicForm = ({ onSubmit }: DemographicFormProps) => {
                 </div>
               </RadioGroup>
             </div>
+            
+            */}
           </div>
           <Button
             type="submit"
