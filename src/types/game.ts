@@ -1,6 +1,7 @@
 export interface PlayerData {
   age: number;
-  gender: 'masculino' | 'feminino' | 'outro';
+  gender: "masculino" | "feminino" | "outro";
+  political: number;
   sessionId: string;
   startTime: number;
 }
@@ -19,7 +20,7 @@ export interface GameState {
 
 export interface Card {
   id: string;
-  type: 'assistente' | 'informante' | 'agente';
+  type: "assistente" | "informante" | "agente";
   title: string;
   description: string;
   choices: Choice[];
@@ -53,7 +54,7 @@ export interface DecisionMetric {
 export interface GameSession {
   playerData: PlayerData;
   decisions: DecisionMetric[];
-  finalScores: GameState['scores'];
+  finalScores: GameState["scores"];
   finalOutcome: string;
   totalTime: number;
 }

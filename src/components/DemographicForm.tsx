@@ -8,7 +8,7 @@ import { PlayerData } from "@/types/game";
 type PoliticalPosition = "1" | "2" | "3" | "4" | "5" | "nao_respondeu";
 
 interface DemographicFormProps {
-  onSubmit: (data: PlayerData & { political?: string }) => void;
+  onSubmit: (data: PlayerData) => void;
 }
 
 export const DemographicForm = ({ onSubmit }: DemographicFormProps) => {
@@ -25,10 +25,10 @@ export const DemographicForm = ({ onSubmit }: DemographicFormProps) => {
       return;
     }
 
-    const playerData: PlayerData & { political?: string } = {
+    const playerData: PlayerData = {
       age: parseInt(age),
       gender,
-      political,
+      political: political === "nao_respondeu" ? 0 : parseInt(political),
       sessionId: `session_${Date.now()}_${Math.random()
         .toString(36)
         .substr(2, 9)}`,
