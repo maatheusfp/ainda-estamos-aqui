@@ -36,9 +36,9 @@ export const ScoreDisplay = ({
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-2 md:gap-4">
         {/* População */}
-        <div className="p-4 border border-population/30 bg-population/5 rounded-lg">
+        <div className="p-2 md:p-4 border border-population/30 bg-population/5 rounded-lg">
           <div className="flex justify-between items-center mb-2">
             <h3 className="font-mono font-bold text-population">POPULAÇÃO</h3>
             <span className="font-mono text-lg font-bold text-population">
@@ -80,7 +80,7 @@ export const ScoreDisplay = ({
         </div>
 
         {/* Governo */}
-        <div className="p-4 border border-government/30 bg-government/5 rounded-lg">
+        <div className="p-2 md:p-4 border border-government/30 bg-government/5 rounded-lg">
           <div className="flex justify-between items-center mb-2">
             <h3 className="font-mono font-bold text-government">GOVERNO</h3>
             <span className="font-mono text-lg font-bold text-government">

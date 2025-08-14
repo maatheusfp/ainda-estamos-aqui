@@ -5,13 +5,17 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { PlayerData } from "@/types/game";
 
+type PoliticalPosition = "1" | "2" | "3" | "4" | "5" | "nao_respondeu";
+
 interface DemographicFormProps {
-  onSubmit: (data: PlayerData) => void;
+  onSubmit: (data: PlayerData & { political?: string }) => void;
 }
 
 export const DemographicForm = ({ onSubmit }: DemographicFormProps) => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState<PlayerData["gender"]>("masculino");
+  const [political, setPolitical] =
+    useState<PoliticalPosition>("nao_respondeu");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,9 +25,10 @@ export const DemographicForm = ({ onSubmit }: DemographicFormProps) => {
       return;
     }
 
-    const playerData: PlayerData = {
+    const playerData: PlayerData & { political?: string } = {
       age: parseInt(age),
       gender,
+      political,
       sessionId: `session_${Date.now()}_${Math.random()
         .toString(36)
         .substr(2, 9)}`,
@@ -102,8 +107,53 @@ export const DemographicForm = ({ onSubmit }: DemographicFormProps) => {
                 </RadioGroup>
               </div>
             </div>
-          </div>
 
+            <div>
+              <Label className="font-mono mt-4 block">
+                Posicionamento Político
+              </Label>
+              <div className="h-3" />
+              <RadioGroup
+                value={political}
+                onValueChange={(value) =>
+                  setPolitical(value as PoliticalPosition)
+                }
+                className="mt-2"
+              >
+                <div className="flex items-center gap-2 mb-2 w-full justify-center">
+                  <span className="text-xs text-muted-foreground mr-1">
+                    Esquerda
+                  </span>
+                  {["1", "2", "3", "4", "5"].map((val) => (
+                    <div key={val} className="flex flex-col items-center mx-1">
+                      <RadioGroupItem value={val} id={"politico-" + val} />
+                      <Label
+                        htmlFor={"politico-" + val}
+                        className="font-normal text-xs"
+                      >
+                        {val}
+                      </Label>
+                    </div>
+                  ))}
+                  <span className="text-xs text-muted-foreground ml-1">
+                    Direita
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem
+                    value="nao_respondeu"
+                    id="politico-nao-respondeu"
+                  />
+                  <Label
+                    htmlFor="politico-nao-respondeu"
+                    className="font-normal"
+                  >
+                    Prefiro não responder
+                  </Label>
+                </div>
+              </RadioGroup>
+            </div>
+          </div>
           <Button
             type="submit"
             className="w-full h-12 font-mono font-bold"

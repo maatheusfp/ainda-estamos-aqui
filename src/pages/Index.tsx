@@ -58,19 +58,25 @@ const Index = () => {
         <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center min-h-[60vh] p-4">
           <div className="bg-card border-2 border-foreground rounded-lg shadow-xl p-6 sm:p-10 text-center">
             <h1 className="text-2xl sm:text-3xl font-serif font-bold mb-4 text-foreground">
-              Bem-vindo ao Diário de Lúmenia
+              Bem-vindo ao Diário de Novaterra
             </h1>
             <p className="text-base sm:text-lg text-foreground mb-6 font-newspaper leading-relaxed">
-              Você é o editor-chefe do principal jornal de Lúmenia, um país
+              Você é o editor-chefe do principal jornal de Novaterra, um país
               fictício mergulhado em uma ditadura cada vez mais repressiva. O
               movimento antigoverno cresce nas ruas, mas as autoridades
               intensificam a vigilância e a censura.
-              <br />
               <br />
               Sua missão é escolher, a cada dia, qual será a manchete de capa do
               jornal. Suas decisões podem inspirar mudanças, mas também colocar
               sua vida pessoal e sua equipe em risco. Equilibre suas convicções
               políticas com as consequências reais de cada escolha.
+              <br />
+              <br />
+              Sua impopularidade tanto com o governo quanto com a população pode
+              aumentar seu nível de paranoia. Quanto maior a paranoia, menos
+              certeza você terá sobre sua reputação com esses grupos: os
+              indicadores de reputação ficarão mais imprecisos à medida que a
+              paranoia cresce.
               <br />
               <br />
               Até onde você irá para defender a verdade?
@@ -110,8 +116,22 @@ const Index = () => {
   const isSkipped = shouldSkipCurrentRound();
 
   return (
-    <div className="min-h-screen bg-background py-8 px-4">
+    <div className="min-h-screen bg-background pb-2 md:py-8 px-4">
       <div className="max-w-6xl mx-auto">
+        {/* Header fixo com botão centralizado no mobile */}
+        <header className="block md:hidden bg-background border-b border-border py-2 shadow-sm">
+          <div className="flex justify-center items-center">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleRestart}
+              className="font-mono text-xs"
+            >
+              Reiniciar Jogo
+            </Button>
+          </div>
+        </header>
+
         {/* Header estilo jornal */}
         <div className="hidden md:block text-center mb-8 border-b-4 border-foreground pb-6">
           <h1 className="text-6xl font-serif font-black mb-4 text-foreground uppercase tracking-widest">
@@ -150,15 +170,15 @@ const Index = () => {
           )}
         </div>
 
-        {/* Botão de emergência para reiniciar */}
-        <div className="text-center">
+        {/* Botão de emergência para reiniciar (desktop) */}
+        <div className="hidden md:block text-center">
           <Button
             variant="outline"
             size="sm"
             onClick={handleRestart}
             className="font-mono text-xs"
           >
-            Reiniciar Experimento
+            Reiniciar Jogo
           </Button>
         </div>
       </div>
