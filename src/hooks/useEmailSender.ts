@@ -41,12 +41,11 @@ export const useEmailSender = () => {
           `Nova sessão de jogo concluída:\n\n` +
           `Participante: ${sessionData.playerData.age} anos\n` +
           `Gênero: ${sessionData.playerData.gender}\n` +
-          `Posicionamento Político (escala): ${
-            sessionData.playerData.political &&
-            sessionData.playerData.political > 0
-              ? sessionData.playerData.political
-              : "não informado"
-          }\n` +
+          `Posicionamento Político (escala): ` +
+          (sessionData.playerData.political > 0
+            ? sessionData.playerData.political
+            : "Prefiro não responder") +
+          "\n" +
           `Sessão ID: ${sessionData.playerData.sessionId}\n` +
           `Tempo total: ${sessionData.sessionInfo.totalPlayTime} minutos\n` +
           `Decisões tomadas: ${sessionData.gameMetrics.decisions.length}\n\n` +
@@ -95,6 +94,12 @@ export const useEmailSender = () => {
     text += `ID da Sessão: ${playerData.sessionId}\n`;
     text += `Idade: ${playerData.age} anos\n`;
     text += `Gênero: ${playerData.gender}\n`;
+    text +=
+      `Posicionamento Político (escala): ` +
+      (playerData.political > 0
+        ? playerData.political
+        : "Prefiro não responder") +
+      "\n";
     text += `Tempo de Início: ${new Date(playerData.startTime).toLocaleString(
       "pt-BR"
     )}\n\n`;
