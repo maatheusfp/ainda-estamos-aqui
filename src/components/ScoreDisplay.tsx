@@ -32,10 +32,11 @@ export const ScoreDisplay = ({
     scores.government,
     scores.paranoia
   );
+  const margin = Math.floor(scores.paranoia / 2);
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* População */}
         <div className="p-4 border border-population/30 bg-population/5 rounded-lg">
           <div className="flex justify-between items-center mb-2">
@@ -44,18 +45,36 @@ export const ScoreDisplay = ({
               {displayedPopulation}
             </span>
           </div>
-          <Progress
-            value={displayedPopulation}
-            className="h-2"
-            style={
-              {
-                "--progress-background": "hsl(var(--population))",
-              } as React.CSSProperties
-            }
-          />
+          <div className="relative w-full">
+            {/* Barra base azul */}
+            <Progress
+              value={scores.population}
+              className="h-2"
+              style={
+                {
+                  "--progress-background": "hsl(var(--population))",
+                } as React.CSSProperties
+              }
+            />
+            {/* Barra amarela de margem de erro */}
+            {scores.paranoia > 0 && (
+              <div
+                className="absolute top-0 left-0 h-2 bg-yellow-400 pointer-events-none rounded"
+                style={{
+                  left: `${Math.max(0, scores.population - margin)}%`,
+                  width: `${
+                    Math.min(100, scores.population + margin) -
+                    Math.max(0, scores.population - margin)
+                  }%`,
+                  minWidth: margin > 0 ? "8px" : "0",
+                  zIndex: 2,
+                }}
+              />
+            )}
+          </div>
           {scores.paranoia > 0 && (
             <p className="text-xs text-muted-foreground mt-1 font-mono">
-              ±{Math.floor(scores.paranoia / 2)} margem de erro
+              ±{margin} margem de erro
             </p>
           )}
         </div>
@@ -68,62 +87,42 @@ export const ScoreDisplay = ({
               {displayedGovernment}
             </span>
           </div>
-          <Progress
-            value={displayedGovernment}
-            className="h-2"
-            style={
-              {
-                "--progress-background": "hsl(var(--government))",
-              } as React.CSSProperties
-            }
-          />
+          <div className="relative w-full">
+            {/* Barra base vermelha */}
+            <Progress
+              value={scores.government}
+              className="h-2"
+              style={
+                {
+                  "--progress-background": "hsl(var(--government))",
+                } as React.CSSProperties
+              }
+            />
+            {/* Barra amarela de margem de erro */}
+            {scores.paranoia > 0 && (
+              <div
+                className="absolute top-0 left-0 h-2 bg-yellow-400 pointer-events-none rounded"
+                style={{
+                  left: `${Math.max(0, scores.government - margin)}%`,
+                  width: `${
+                    Math.min(100, scores.government + margin) -
+                    Math.max(0, scores.government - margin)
+                  }%`,
+                  minWidth: margin > 0 ? "8px" : "0",
+                  zIndex: 2,
+                }}
+              />
+            )}
+          </div>
           {scores.paranoia > 0 && (
             <p className="text-xs text-muted-foreground mt-1 font-mono">
-              ±{Math.floor(scores.paranoia / 2)} margem de erro
+              ±{margin} margem de erro
             </p>
           )}
         </div>
-
-        {/* Paranoia */}
-        {showParanoia && (
-          <div className="p-4 border border-paranoia/30 bg-paranoia/5 rounded-lg">
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="font-mono font-bold text-paranoia">PARANOIA</h3>
-              <span className="font-mono text-lg font-bold text-paranoia">
-                {scores.paranoia}
-              </span>
-            </div>
-            <div className="h-2 bg-muted rounded-full overflow-hidden">
-              {/* A barra agora vai de 0 a 100 sempre */}
-              <div
-                className="h-full bg-paranoia transition-all duration-300"
-                style={{
-                  width: `${Math.min(100, (scores.paranoia / 100) * 100)}%`,
-                }}
-              />
-            </div>
-            <p className="text-xs text-muted-foreground mt-1 font-mono">
-              Afeta percepção das pontuações
-            </p>
-          </div>
-        )}
       </div>
 
-      {/* Consequências Ativas */}
-      {gameState.consequences.length > 0 && (
-        <div className="mt-4 p-4 border border-destructive/30 bg-destructive/5 rounded-lg">
-          <h4 className="font-mono font-bold text-destructive mb-2">
-            CONSEQUÊNCIAS ATIVAS:
-          </h4>
-          <ul className="space-y-1">
-            {gameState.consequences.map((consequence, index) => (
-              <li key={index} className="text-sm font-mono text-destructive/90">
-                • {consequence}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/* Consequências Ativas removidas */}
     </div>
   );
 };
