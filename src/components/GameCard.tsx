@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { Card, Choice } from "@/types/game";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -18,7 +19,6 @@ export const GameCard = ({
 }: GameCardProps) => {
   const [startTime] = useState(Date.now());
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
-  const [showIntro, setShowIntro] = useState(card == null);
 
   console.log(
     "GameCard rendered with card:",
@@ -67,42 +67,6 @@ export const GameCard = ({
     }
   };
 
-  if (showIntro) {
-    return (
-      <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center min-h-[60vh] p-4">
-        <div className="bg-card border-2 border-foreground rounded-lg shadow-xl p-6 sm:p-10 text-center">
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold mb-4 text-foreground">
-            Bem-vindo ao Diário de Lúmenia
-          </h1>
-          <p className="text-base sm:text-lg text-foreground mb-6 font-newspaper leading-relaxed">
-            Você é o editor-chefe do principal jornal de Lúmenia, um país
-            fictício mergulhado em uma ditadura cada vez mais repressiva. O
-            movimento antigoverno cresce nas ruas, mas as autoridades
-            intensificam a vigilância e a censura.
-            <br />
-            <br />
-            Sua missão é escolher, a cada dia, qual será a manchete de capa do
-            jornal. Suas decisões podem inspirar mudanças, mas também colocar
-            sua vida pessoal e sua equipe em risco. Equilibre suas convicções
-            políticas com as consequências reais de cada escolha.
-            <br />
-            <br />
-            Até onde você irá para defender a verdade?
-          </p>
-          <Button
-            className="mt-2 px-8 py-2 text-lg font-mono"
-            onClick={() => {
-              setShowIntro(false);
-              if (onStartGame) onStartGame();
-            }}
-          >
-            Começar Jogo
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
   if (isSkipped) {
     return (
       <div className="w-full max-w-2xl mx-auto">
@@ -137,7 +101,7 @@ export const GameCard = ({
 
         {/* Manchete principal */}
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-serif font-black mb-4 text-foreground uppercase tracking-wide leading-tight">
+          <h1 className="text-2xl md:text-3xl font-serif font-black mb-4 text-foreground uppercase tracking-wide leading-tight">
             {card.title}
           </h1>
           <div className="w-full h-1 bg-foreground mb-6"></div>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import escritorioImg from "@/assets/escritorio.png";
 import { PlayerData, Choice } from "@/types/game";
 import { DemographicForm } from "@/components/DemographicForm";
 import { GameCard } from "@/components/GameCard";
@@ -74,6 +75,12 @@ const Index = () => {
               <br />
               Até onde você irá para defender a verdade?
             </p>
+            <img
+              src={escritorioImg}
+              alt="Ilustração de um escritório de jornal"
+              className="mx-auto mb-6 rounded-lg shadow-md max-h-56 object-contain"
+              style={{ background: "#f8f8f8" }}
+            />
             <Button
               className="mt-2 px-8 py-2 text-lg font-mono"
               onClick={handleStartGame}
@@ -106,7 +113,7 @@ const Index = () => {
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header estilo jornal */}
-        <div className="text-center mb-8 border-b-4 border-foreground pb-6">
+        <div className="hidden md:block text-center mb-8 border-b-4 border-foreground pb-6">
           <h1 className="text-6xl font-serif font-black mb-4 text-foreground uppercase tracking-widest">
             Ainda Estamos Aqui
           </h1>
